@@ -8,6 +8,7 @@ import NewAnecdote from './components/NewAncdote'
 import About from './components/About'
 import Anecdote from './components/Anecdote'
 import Notification from './components/Notification'
+import Countries from './components/Countries'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -93,6 +94,7 @@ const App = () => {
         <Link style={padding} to="/anecdotes_new">create anecdote</Link>
         <Link style={padding} to="/notes">notes</Link>
         <Link style={padding} to="/users">users</Link>
+        <Link style={padding} to="/countries">countries</Link>
         <Link style={padding} to="/about">about</Link>
         {username
           ? <em>{username} logged in</em>
@@ -108,6 +110,7 @@ const App = () => {
         <Route path="/anecdotes_new" element={<NewAnecdote addNew ={addNew} />} />
         {/* <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} /> */}
         <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />
+        <Route path="/countries" element={<Countries />} />
         <Route path="/about" element={<About />} />
       </Routes>
 

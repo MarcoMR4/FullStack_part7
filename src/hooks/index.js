@@ -43,3 +43,43 @@ export const useCountry = (name) => {
   
     return country
 }
+
+export const useResource = (baseUrl) => {
+    const [resources, setResources] = useState([])
+  
+    useEffect(() => {
+        const fetchData = async() => {
+            try {
+                const result = await axios.get(baseUrl)
+                setResources(result.data)
+                console.log(resources)
+            } 
+            catch (error) {
+                console.error("It's ocurred an error: ",error)
+            }
+        }
+        fetchData()
+    }, [baseUrl])
+  
+    const create = async (resource) => {
+        try {
+            const newNote = {
+                content: resource.content,
+                important: false
+            }
+            const result = await axios.post(baseUrl, resource)
+            setResources(resources.concat(result.data))
+        } 
+        catch (error) {
+            console.error('Error trying to create new note ',error)
+        }
+    }
+  
+    const service = {
+      create
+    }
+  
+    return [
+      resources, service
+    ]
+}

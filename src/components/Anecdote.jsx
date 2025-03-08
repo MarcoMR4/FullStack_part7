@@ -1,8 +1,4 @@
-// import { useParams } from "react-router-dom"
-
 const Anecdote = ({anecdote}) => {
-    // const id = useParams().id
-    // const anecdote = anecdotes.find(a => a.id === Number(id)) 
 
     return(
         <div>

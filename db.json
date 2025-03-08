@@ -1,0 +1,79 @@
+{
+  "notes": [
+    {
+      "content": "the app state is in redux store",
+      "important": true,
+      "id": "1"
+    },
+    {
+      "content": "state changes are made with actions",
+      "important": true,
+      "id": "2"
+    },
+    {
+      "id": "5b34",
+      "content": "note to json server ",
+      "important": false
+    },
+    {
+      "id": "af3c",
+      "content": "hello"
+    },
+    {
+      "id": "08dd",
+      "content": "new note jeje"
+    },
+    {
+      "id": "3013",
+      "content": "new note jeje1"
+    },
+    {
+      "id": "fae7",
+      "content": "nueva nota "
+    },
+    {
+      "id": "e3a4",
+      "content": "sr 71"
+    },
+    {
+      "id": "9041",
+      "content": "hello hello "
+    },
+    {
+      "id": "fce2",
+      "content": "Hola nota "
+    }
+  ],
+  "people": [
+    {
+      "name": "Mark Market",
+      "number": "443 286 8808",
+      "id": "b373"
+    },
+    {
+      "id": "d7bb",
+      "name": "Liliana Sepulveda ",
+      "number": "12345678"
+    },
+    {
+      "id": "af15",
+      "name": "Sophia Dee",
+      "number": "+1 4356 5654"
+    },
+    {
+      "id": "7e3a",
+      "name": "Sophia Dee2",
+      "number": "+1 4356 5654"
+    },
+    {
+      "id": "fdea",
+      "name": "R",
+      "number": "+1 4356 5654"
+    },
+    {
+      "id": "fba0",
+      "name": "Kareem Sanchez ",
+      "number": "+52 443 543 7654"
+    }
+  ]
+}

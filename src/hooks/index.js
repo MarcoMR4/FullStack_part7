@@ -52,7 +52,7 @@ export const useResource = (baseUrl) => {
             try {
                 const result = await axios.get(baseUrl)
                 setResources(result.data)
-                console.log(resources)
+                // console.log(resources)
             } 
             catch (error) {
                 console.error("It's ocurred an error: ",error)

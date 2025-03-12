@@ -1,5 +1,7 @@
 import { useResource } from "../hooks"
 import { useField } from "../hooks"
+import { Table } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 const Notes = () => {
     const [notes, noteService] = useResource('http://localhost:3005/notes')
@@ -27,7 +29,22 @@ const Notes = () => {
             <input {...content} />
             <button>create</button>
         </form> 
-        {notes.map(n => <p key={n.id}>{n.content}</p>)}
+        <Table striped>
+      <tbody>
+        {notes.map(note =>
+          <tr key={note.id}>
+            <td>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
+            </td>
+            <td>
+              {note.important}
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </Table>
     </div>
 
     </>

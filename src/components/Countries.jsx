@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import { useField, useCountry } from '../hooks'
-import axios from 'axios'
 import Country from './Country'
 
 const Countries = () => {

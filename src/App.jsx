@@ -12,6 +12,11 @@ import Countries from './components/Countries'
 import Notes from './components/Notes'
 import People from './components/People'
 
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { hideNotification } from './reducers/notificationReducer'
+import { sendNotification } from './reducers/notificationReducer'
+
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
 )
@@ -23,6 +28,9 @@ const Users = () => (
 const App = () => {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const showNotif = useSelector((state) => state.notification.showNotification);
   
   const padding = {
     padding: 5
@@ -30,8 +38,6 @@ const App = () => {
 
   const username = 'root'
 
-  const [showNotif, setShowNotif] = useState(false)
-  const [messageNotification, setMessageNotification] = useState('')
 
 
   const [anecdotes, setAnecdotes] = useState([
@@ -54,11 +60,9 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
-    setMessageNotification(`Anecdote ${anecdote.content} added!`)
-    setShowNotif(true)
+    dispatch(sendNotification({ message:` New anecdote ${anecdote.content} by ${anecdote.author} added!` }));
     setTimeout(() => {
-      setMessageNotification('')
-      setShowNotif(false)
+      dispatch(hideNotification())
     }, 3000)
 
     navigate('/anecdotes', { replace: true })
@@ -86,7 +90,7 @@ const App = () => {
 
   return (
     <>
-      <div>
+      <div className='container'>
         <Link style={padding} to="/">home</Link>
         <Link style={padding} to="/anecdotes">anecdotes</Link>
         <Link style={padding} to="/anecdotes_new">create anecdote</Link>
@@ -99,28 +103,28 @@ const App = () => {
           ? <em>{username} logged in</em>
           : <Link style={padding} to="/login">login</Link>
         }
-      </div>
 
-      <Routes>
-        <Route path="/notes" element={<Notes />} />
-        <Route path="/people" element={<People />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes} />} />
-        <Route path="/anecdotes_new" element={<NewAnecdote addNew ={addNew} />} />
-        {/* <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} /> */}
-        <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />
-        <Route path="/countries" element={<Countries />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+          <Routes>
+                  <Route path="/notes" element={<Notes />} />
+                  <Route path="/people" element={<People />} />
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes} />} />
+                  <Route path="/anecdotes_new" element={<NewAnecdote addNew ={addNew} />} />
+                  {/* <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} /> */}
+                  <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />
+                  <Route path="/countries" element={<Countries />} />
+                  <Route path="/about" element={<About />} />
+                </Routes>
 
-      {
-        showNotif && <Notification message = {messageNotification} />
-      }
+                {
+                  showNotif && <Notification/>
+                }
 
-      <div>
-        <i>Note app, Department of Computer Science 2024</i>
-        <Footer />
+                <div>
+                  <i>Note app, Department of Computer Science 2024</i>
+                  <Footer />
+                </div>
       </div>
     </>
   )

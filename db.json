@@ -75,5 +75,47 @@
       "name": "Kareem Sanchez ",
       "number": "+52 443 543 7654"
     }
+  ],
+  "anecdotes": [
+    {
+      "content": "If it hurts, do it more often ñ.ñ",
+      "votes": 2,
+      "id": "47145"
+    },
+    {
+      "content": "Adding manpower to a late software project makes it later!",
+      "id": "21149",
+      "votes": 0
+    }
+  ],
+  "blogs": [
+    {
+      "id": "54",
+      "title": "Aprendiendo React desde cero",
+      "author": "Juan Pérez",
+      "url": "https://reactblog.com/aprendiendo-react",
+      "likes": 150
+    },
+    {
+      "id": "55",
+      "title": "Guía completa de Redux Toolkit",
+      "author": "María López",
+      "url": "https://reduxblog.com/guia-completa",
+      "likes": 200
+    },
+    {
+      "id": "c93e",
+      "title": "Learning React js ",
+      "author": "Marko MR ",
+      "url": "www.reactM.com",
+      "likes": 0
+    },
+    {
+      "id": "6a0c",
+      "title": "Redux is useful now ",
+      "author": "Javier XR",
+      "url": "www.javi.com",
+      "likes": 0
+    }
   ]
 }

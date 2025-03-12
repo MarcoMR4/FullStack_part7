@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import {
-  Routes, Route, Link, useNavigate, useMatch
+  Routes, Route, Link
 } from 'react-router-dom'
 import Footer from './components/Footer'
 import AnecdoteList from './components/AnecdoteList'
@@ -11,11 +10,12 @@ import Notification from './components/Notification'
 import Countries from './components/Countries'
 import Notes from './components/Notes'
 import People from './components/People'
-
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { hideNotification } from './reducers/notificationReducer'
-import { sendNotification } from './reducers/notificationReducer'
+import Blogs from './components/Blogs'
+import NewBlog from './components/newBlog'
+import { useState } from 'react'
+import { useNavigate, useMatch} from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
+import { sendNotification, hideNotification } from './reducers/notificationReducer'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -27,18 +27,13 @@ const Users = () => (
 
 const App = () => {
 
-  const navigate = useNavigate()
+  const showNotif = useSelector((state) => state.notification.showNotification)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const showNotif = useSelector((state) => state.notification.showNotification);
-  
   const padding = {
     padding: 5
   }
-
-  const username = 'root'
-
-
 
   const [anecdotes, setAnecdotes] = useState([
     {
@@ -68,32 +63,37 @@ const App = () => {
     navigate('/anecdotes', { replace: true })
   }
 
+  const match = useMatch('/anecdotes/:id')
+  const anecdote = match 
+  ? anecdotes.find(a => a.id === Number(match.params.id))
+  : null
 
+  
   const anecdoteById = (id) =>
     anecdotes.find(a => a.id === id)
 
   const vote = (id) => {
     const anecdote = anecdoteById(id)
-
     const voted = {
       ...anecdote,
       votes: anecdote.votes + 1
     }
-
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
+    dispatch(sendNotification({ message:` Voted for ${anecdote.content} by ${anecdote.author}!` }));
+    setTimeout(() => {
+      dispatch(hideNotification())
+    }, 3000)
   }
 
-  const match = useMatch('/anecdotes/:id')
-  const anecdote = match 
-    ? anecdotes.find(a => a.id === Number(match.params.id))
-    : null
+  const username = 'root'
 
   return (
     <>
       <div className='container'>
-        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/">home</Link> 
+        <Link style={padding} to="/blogs">blogs</Link>
         <Link style={padding} to="/anecdotes">anecdotes</Link>
-        <Link style={padding} to="/anecdotes_new">create anecdote</Link>
+        {/* <Link style={padding} to="/anecdotes_new">create anecdote</Link> */}
         <Link style={padding} to="/notes">notes</Link>
         <Link style={padding} to="/people">people</Link>
         <Link style={padding} to="/users">users</Link>
@@ -109,11 +109,13 @@ const App = () => {
                   <Route path="/people" element={<People />} />
                   <Route path="/users" element={<Users />} />
                   <Route path="/" element={<Home />} />
-                  <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes} />} />
+                  <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes} vote={vote} />} />
                   <Route path="/anecdotes_new" element={<NewAnecdote addNew ={addNew} />} />
                   {/* <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} /> */}
                   <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />
                   <Route path="/countries" element={<Countries />} />
+                  <Route path="/blogs" element={<Blogs />} />
+                  <Route path="/newBlog" element={<NewBlog />} />
                   <Route path="/about" element={<About />} />
                 </Routes>
 

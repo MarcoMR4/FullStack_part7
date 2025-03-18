@@ -12,10 +12,12 @@ import Notes from './components/Notes'
 import People from './components/People'
 import Blogs from './components/Blogs'
 import NewBlog from './components/newBlog'
+import Login from './components/Login'
 import { useState } from 'react'
 import { useNavigate, useMatch} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { sendNotification, hideNotification } from './reducers/notificationReducer'
+import { logoutUser } from './reducers/authReducer'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -30,6 +32,8 @@ const App = () => {
   const showNotif = useSelector((state) => state.notification.showNotification)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const user = useSelector(state => state.auth.user)
 
   const padding = {
     padding: 5
@@ -85,48 +89,59 @@ const App = () => {
     }, 3000)
   }
 
-  const username = 'root'
+  const handleLogout = () => {
+    dispatch(logoutUser())
+    navigate('/login') 
+  }
 
   return (
     <>
-      <div className='container'>
-        <Link style={padding} to="/">home</Link> 
-        <Link style={padding} to="/blogs">blogs</Link>
-        <Link style={padding} to="/anecdotes">anecdotes</Link>
-        {/* <Link style={padding} to="/anecdotes_new">create anecdote</Link> */}
-        <Link style={padding} to="/notes">notes</Link>
-        <Link style={padding} to="/people">people</Link>
-        <Link style={padding} to="/users">users</Link>
-        <Link style={padding} to="/countries">countries</Link>
-        <Link style={padding} to="/about">about</Link>
-        {username
-          ? <em>{username} logged in</em>
-          : <Link style={padding} to="/login">login</Link>
+      <div>
+        <Link to="/">Home</Link>
+        {user && <Link to="/blogs">Blogs</Link>}
+        {user && <Link to="/notes">Notes</Link>}
+        {user && <Link to="/people">People</Link>}
+        {user && <Link to="/anecdotes">Anecdotes</Link>}
+        {user && <Link to="/users">Users</Link>}
+        {user && <Link to="/countries">Countries</Link>}
+        <Link to="/about">About</Link>
+        {user
+          ? <button onClick={handleLogout}>Logout ({user.username})</button>
+          : <Link to="/login">Login</Link>
         }
 
-          <Routes>
-                  <Route path="/notes" element={<Notes />} />
-                  <Route path="/people" element={<People />} />
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/" element={<Home />} />
-                  <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes} vote={vote} />} />
-                  <Route path="/anecdotes_new" element={<NewAnecdote addNew ={addNew} />} />
-                  {/* <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} /> */}
-                  <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />
-                  <Route path="/countries" element={<Countries />} />
-                  <Route path="/blogs" element={<Blogs />} />
-                  <Route path="/newBlog" element={<NewBlog />} />
-                  <Route path="/about" element={<About />} />
-                </Routes>
+      <Routes>
+        {user ? (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/newBlog" element={<NewBlog />} />
+            <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes} vote={vote} />} />
+            <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />
+            <Route path="/anecdotes_new" element={<NewAnecdote addNew={addNew} />} />
+            <Route path="/notes" element={<Notes />} />
+            <Route path="/people" element={<People />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/countries" element={<Countries />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+          </>
+        )}
+        <Route path="/about" element={<About />} />
+      </Routes>
 
-                {
-                  showNotif && <Notification/>
-                }
+      {
+        showNotif && <Notification/>
+      }
 
-                <div>
-                  <i>Note app, Department of Computer Science 2024</i>
-                  <Footer />
-                </div>
+      <div>
+        <i>Note app, Department of Computer Science 2024</i>
+        <Footer />
+      </div>
       </div>
     </>
   )

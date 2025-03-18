@@ -1,4 +1,18 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "username": "johndoe",
+      "password": "123456",
+      "name": "John Doe"
+    },
+    {
+      "id": 2,
+      "username": "janedoe",
+      "password": "abcdef",
+      "name": "Jane Doe"
+    }
+  ],
   "notes": [
     {
       "content": "the app state is in redux store",
@@ -115,6 +129,20 @@
       "title": "Redux is useful now ",
       "author": "Javier XR",
       "url": "www.javi.com",
+      "likes": 0
+    },
+    {
+      "id": "28e9",
+      "title": "new blog monday 17th ",
+      "author": "Mark",
+      "url": "www.mark.com",
+      "likes": 0
+    },
+    {
+      "id": "7a80",
+      "title": "new 17 2",
+      "author": "marko",
+      "url": "www.mark.com",
       "likes": 0
     }
   ]

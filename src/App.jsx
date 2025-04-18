@@ -15,11 +15,12 @@ import NewBlog from './components/newBlog'
 import UserView from './components/UserView'
 import UsersList from './components/UsersList'
 import Login from './components/Login'
+import BlogView from './components/BlogView'
 import { useState } from 'react'
 import { useNavigate, useMatch} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { sendNotification, hideNotification } from './reducers/notificationReducer'
-import { logoutUser } from './reducers/authReducer'
+import Navigation from './components/Navigation'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -91,26 +92,10 @@ const App = () => {
     }, 3000)
   }
 
-  const handleLogout = () => {
-    dispatch(logoutUser())
-    navigate('/login') 
-  }
-
   return (
     <>
       <div>
-        <Link to="/">Home</Link>
-        {user && <Link to="/blogs">Blogs</Link>}
-        {user && <Link to="/notes">Notes</Link>}
-        {user && <Link to="/people">People</Link>}
-        {user && <Link to="/anecdotes">Anecdotes</Link>}
-        {user && <Link to="/users">Users</Link>}
-        {user && <Link to="/countries">Countries</Link>}
-        <Link to="/about">About</Link>
-        {user
-          ? <button onClick={handleLogout}>Logout ({user.username})</button>
-          : <Link to="/login">Login</Link>
-        }
+        <Navigation />
 
       <Routes>
         {user ? (
@@ -118,6 +103,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:id" element={<BlogView />} /> 
             <Route path="/newBlog" element={<NewBlog />} />
             <Route path="/anecdotes" element={<AnecdoteList anecdotes={anecdotes} vote={vote} />} />
             <Route path="/anecdotes/:id" element={<Anecdote anecdote={anecdote} />} />

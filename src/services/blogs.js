@@ -1,5 +1,6 @@
 import axios from 'axios';
 const baseUrl = 'http://localhost:3005/blogs';
+const commentUrl = 'http://localhost:3005/comments';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
@@ -21,4 +22,16 @@ const deleteBlog = async (id) => {
   return response.data;
 };
 
-export default { getAll, create, update, deleteBlog };
+const getComments = async (blogId) => {
+  const response = await axios.get(`${commentUrl}?blogId=${blogId}`)
+  return response.data
+}
+
+const addComment = async (blogId, content) => {
+  const response = await axios.post(commentUrl, { blogId, content })
+  return response.data
+}
+
+
+
+export default { getAll, create, update, deleteBlog, addComment, getComments };

@@ -53,24 +53,25 @@ const Blogs = () => {
   };
 
   return (
-    <div className="mt-2">
-      <h2>Blogs</h2>
-      <Link to="/newBlog">Create new blog</Link>
-      <div className="mt-3">
-        {blogs.length === 0 ? (
-          <p>No blogs available.</p>
-        ) : (
-          blogs.map((blog) => (
-            
-            <Blog
-              key={blog.id}
-              blog={blog}
-              onLike={() => handleLike(blog)}
-              onRemove={() => handleRemove(blog)}
-            />
-          ))
-        )}
+    <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-0">Blogs</h2>
+        <Link to="/newBlog" className="btn btn-success">
+          Create new blog
+        </Link>
       </div>
+
+      {blogs.length === 0 ? (
+        <div className="alert alert-info">No any available blogs.</div>
+      ) : (
+        <div className="row">
+          {blogs.map((blog) => (
+            <div key={blog.id} className="col-md-6 mb-3">
+              <Blog blog={blog} onLike={() => handleLike(blog)} onRemove={() => handleRemove(blog)} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

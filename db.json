@@ -97,6 +97,11 @@
       "id": "32a8",
       "name": "John doe 1",
       "number": "443 789 3456"
+    },
+    {
+      "id": "181d",
+      "name": "Brenda Ibañes",
+      "number": "443789651245"
     }
   ],
   "anecdotes": [
@@ -113,18 +118,11 @@
   ],
   "blogs": [
     {
-      "id": "6a0c",
-      "title": "Redux is useful now ",
-      "author": "Javier XR",
-      "url": "www.javi.com",
-      "likes": 0
-    },
-    {
       "id": "874f",
       "title": "Blog proof1",
       "author": "John Doe",
       "url": "www.blog-info.com",
-      "likes": 0,
+      "likes": 1,
       "userId": "1"
     },
     {
@@ -142,6 +140,43 @@
       "url": "www.j.com",
       "likes": 0,
       "userId": "2"
+    },
+    {
+      "id": "b967",
+      "title": "Boostrap with react is nice",
+      "author": "Jane Doe",
+      "url": "www.doe.com",
+      "likes": 0,
+      "userId": "2"
+    }
+  ],
+  "comments": [
+    {
+      "id": "c1",
+      "blogId": null,
+      "content": "¡Buen blog!"
+    },
+    {
+      "id": "c2",
+      "blogId": "874f",
+      "content": "Muy interesante"
+    },
+    {
+      "id": "c5ac",
+      "blogId": null,
+      "content": {
+        "content": "chido"
+      }
+    },
+    {
+      "id": "0028",
+      "blogId": null,
+      "content": "ache"
+    },
+    {
+      "id": "5281",
+      "blogId": "874f",
+      "content": "jeje"
     }
   ]
 }

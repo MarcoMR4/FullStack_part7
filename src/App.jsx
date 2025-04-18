@@ -21,14 +21,11 @@ import { useNavigate, useMatch} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { sendNotification, hideNotification } from './reducers/notificationReducer'
 import Navigation from './components/Navigation'
+import Home from './components/Home'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
-const Home = () => (
-  <div> <h2>TKTL notes app</h2> </div>
-)
-
-const Users = () => (
-  <div> <h2>Users</h2> </div>
-)
 
 const App = () => {
 
@@ -94,7 +91,7 @@ const App = () => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <Navigation />
 
       <Routes>

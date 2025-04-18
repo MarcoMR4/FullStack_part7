@@ -113,32 +113,27 @@
   ],
   "blogs": [
     {
-      "id": "54",
-      "title": "Aprendiendo React desde cero",
-      "author": "Juan Pérez",
-      "url": "https://reactblog.com/aprendiendo-react",
-      "likes": 160
-    },
-    {
-      "id": "55",
-      "title": "Guía completa de Redux Toolkit",
-      "author": "María López",
-      "url": "https://reduxblog.com/guia-completa",
-      "likes": 200
-    },
-    {
-      "id": "c93e",
-      "title": "Learning React js ",
-      "author": "Marko MR ",
-      "url": "www.reactM.com",
-      "likes": 1
-    },
-    {
       "id": "6a0c",
       "title": "Redux is useful now ",
       "author": "Javier XR",
       "url": "www.javi.com",
       "likes": 0
+    },
+    {
+      "id": "874f",
+      "title": "Blog proof1",
+      "author": "John Doe",
+      "url": "www.blog-info.com",
+      "likes": 0,
+      "userId": "1"
+    },
+    {
+      "id": "8785",
+      "title": "new blog by john",
+      "author": "John Doe",
+      "url": "www.new.com",
+      "likes": 0,
+      "userId": "1"
     }
   ]
 }

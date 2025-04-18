@@ -12,6 +12,8 @@ import Notes from './components/Notes'
 import People from './components/People'
 import Blogs from './components/Blogs'
 import NewBlog from './components/newBlog'
+import UserView from './components/UserView'
+import UsersList from './components/UsersList'
 import Login from './components/Login'
 import { useState } from 'react'
 import { useNavigate, useMatch} from "react-router-dom"
@@ -122,7 +124,8 @@ const App = () => {
             <Route path="/anecdotes_new" element={<NewAnecdote addNew={addNew} />} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/people" element={<People />} />
-            <Route path="/users" element={<Users />} />
+            <Route path="/users" element={<UsersList />} />
+            <Route path="/users/:id" element={<UserView />} />
             <Route path="/countries" element={<Countries />} />
           </>
         ) : (

@@ -1,13 +1,16 @@
 import { useField } from "../hooks"
 import blogs from "../services/blogs"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addBlog } from "../reducers/blogsReducer"
 import { useNavigate } from "react-router-dom"
 import { sendNotification, hideNotification } from "../reducers/notificationReducer"
 
+
 const NewBlog = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const loggedUser = useSelector(state => state.auth.user)
 
     const content = useField('text')
     const author = useField('text')
@@ -22,9 +25,10 @@ const NewBlog = () => {
         e.preventDefault()
         const newBlog = {
             title: content.value,
-            author: author.value,
+            author: loggedUser.name,
             url: url.value,
-            likes: 0
+            likes: 0,
+            userId: loggedUser.id  
         }
         try {
             blogs.create(newBlog)
